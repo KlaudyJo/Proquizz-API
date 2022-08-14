@@ -1,8 +1,8 @@
-# from app import app
-# from db import db
+from app import app
+from db import db
 
-# db.init_app(app)
+db.init_app(app)
 
-# @app.before_first_request
-# def create_all():
-#    db.create_all()
+@app.before_first_request
+def create_all():
+   db.create_all()

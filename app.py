@@ -8,6 +8,8 @@ from resources.user import UserRegister
 from security import authenticate, identity
 app = Flask(__name__)
 uri = 'postgresql://postgres:qwert@localhost/data'
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #app.config['PROPAGATE_EXCEPTIONS'] = True
@@ -17,9 +19,6 @@ api = Api(app)
 
 jwt = JWT(app, authenticate, identity)
 
-@app.before_first_request
-def create_all():
-   db.create_all()
 
 
 api.add_resource(QuestionsAll, '/questions/all')
