@@ -15,7 +15,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CORS_HEADERS'] = 'Content-Type'
 cors = CORS(app, resorces={r'/questions/*': {"origins": '*'}})
-#app.config['PROPAGATE_EXCEPTIONS'] = True
+
 
 app.secret_key = os.environ.get('HESLO_FLASK')
 api = Api(app)
