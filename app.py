@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
 import os
+from flask_cors import CORS
 from resources.questions import QuestionsAll, Question
 from resources.metadata import MetaData, UniqueData
 from resources.user import UserRegister
@@ -12,6 +13,8 @@ if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 app.config['SQLALCHEMY_DATABASE_URI'] = uri
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['CORS_HEADERS'] = 'Content-Type'
+cors = CORS(app, resorces={r'/questions/*': {"origins": '*'}})
 #app.config['PROPAGATE_EXCEPTIONS'] = True
 
 app.secret_key = os.environ.get('HESLO_FLASK')
